@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping(path="/api")
 public class IndexController {
-    @GetMapping(path="/api")
+    @GetMapping(path="")
     public @ResponseBody HashMap<String, Object> index() {
         HashMap<String, Object> res = new HashMap<>();
 
