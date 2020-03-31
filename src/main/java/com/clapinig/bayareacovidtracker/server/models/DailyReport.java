@@ -1,26 +1,25 @@
 package com.clapinig.bayareacovidtracker.server.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class DailyReport {
     @Id
     private Integer FIPS;
-
     private String Admin2;
     private String Province_State;
     private String Country_Region;
     private String Last_Update;
-    private Float Lat;
-    private Float Long_;
+    private Double Lat;
+    private Double Long_;
     private Integer Confirmed;
     private Integer Deaths;
     private Integer Recovered;
     private Integer Active;
     private String Combined_Key;
+
+    public DailyReport () {}
 
     public Integer getFIPS() {
         return FIPS;
@@ -62,19 +61,19 @@ public class DailyReport {
         Last_Update = last_Update;
     }
 
-    public Float getLat() {
+    public Double getLat() {
         return Lat;
     }
 
-    public void setLat(Float lat) {
+    public void setLat(Double lat) {
         Lat = lat;
     }
 
-    public Float getLong_() {
+    public Double getLong_() {
         return Long_;
     }
 
-    public void setLong_(Float long_) {
+    public void setLong_(Double long_) {
         Long_ = long_;
     }
 

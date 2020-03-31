@@ -8,18 +8,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.clapinig.bayareacovidtracker.server.models.DailyReport;
-import com.clapinig.bayareacovidtracker.server.repositories.DailyReportRepository;
+import com.clapinig.bayareacovidtracker.server.services.DailyReportService;
 
 @RestController
-@RequestMapping(path="/api/daily-reports")
+@RequestMapping(path="/api")
 public class DailyReportController {
-    //@Autowired
-    //private DailyReportRepository dailyReportRepository;
+    @Autowired
+    private DailyReportService dailyReportService;
 
-    @GetMapping(path="/all")
+    @GetMapping(path="/daily-reports")
     public @ResponseBody HashMap<String, Object> getAll() {
         HashMap<String, Object> res = new HashMap<>();
+
+        try {
+            res.put("success", true);
+            res.put("dailyReport", dailyReportService.getDailyReport());
+        } catch (Exception e) {
+            res.put("success", false);
+            res.put("err", e.getMessage());
+        }
+
         return res;
     }
 }
