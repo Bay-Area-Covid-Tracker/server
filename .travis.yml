@@ -1,0 +1,10 @@
+language: java
+jdk: openjdk8
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS bay_area_covid_19_tracker;'
+
+script:
+  - mvn clean install -B
