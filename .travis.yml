@@ -5,7 +5,6 @@ services:
 
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS bay_area_covid_19_tracker;'
-  - mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root' IDENTIFIED BY '@_rootpassword1_!' WITH GRANT OPTION;"
 
 script:
   - mvn clean install -B
