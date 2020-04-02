@@ -20,6 +20,7 @@ public class DailyReportServiceTest {
     @Mock
     private DailyReportService dailyReportService = new DailyReportServiceImpl();
 
+    // Initialize dummy report
     HashMap<String, County> dummyReport = new HashMap<>();
 
     @BeforeEach
