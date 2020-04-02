@@ -33,7 +33,7 @@ public class DailyReportServiceTest {
         when(dailyReportService.getDailyReport()).thenReturn(dummyReport);
     }
 
-    @DisplayName("getDailyReport should fetch daily report")
+    @DisplayName("fetch daily reports")
     @Test
     void testGetDailyReport() {
         assertEquals(dummyReport, dailyReportService.getDailyReport());
