@@ -7,11 +7,9 @@ import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.clapinig.bayareacovidtracker.server.repositories.DailyReportRepository;
 import com.clapinig.bayareacovidtracker.server.models.County;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
