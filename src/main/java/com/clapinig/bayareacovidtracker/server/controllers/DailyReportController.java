@@ -22,7 +22,7 @@ public class DailyReportController {
 
         try {
             res.put("success", true);
-            res.put("dailyReport", dailyReportService.getDailyReport());
+            res.put("reports", dailyReportService.getDailyReport());
         } catch (Exception e) {
             res.put("success", false);
             res.put("err", e.getMessage());

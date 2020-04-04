@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.clapinig.bayareacovidtracker.server.models.County;
+import com.clapinig.bayareacovidtracker.server.models.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -21,20 +21,27 @@ public class DailyReportServiceTest {
     private DailyReportService dailyReportService = new DailyReportServiceImpl();
 
     // Initialize dummy report
-    HashMap<String, County> dummyReport = new HashMap<>();
+    List<Report> dummyReports = new ArrayList<>();
 
     @BeforeEach
     void setMockOutput() {
         // Setup dummy data for test
-        County dummyCounty = new County(5555, "Alameda", "California", "US", "2020-03-28 23:05:37", 37.6463, -121.893, 200, 4);
-        dummyReport.put(dummyCounty.getCounty(), dummyCounty);
+        County dummyCounty = new County(5555, "Alameda", "California", "US", "2020-03-28 23:05:37", 200, 4);
+        Point dummyPoint = new Point(new ArrayList<Double>() {
+            {
+                add(-121.697);
+                add(37.231);
+            }
+        });
+        Report dummyReport = new Report(dummyCounty, dummyPoint);
+        dummyReports.add(dummyReport);
 
-        when(dailyReportService.getDailyReport()).thenReturn(dummyReport);
+        when(dailyReportService.getDailyReport()).thenReturn(dummyReports);
     }
 
     @DisplayName("fetch daily reports with getDailyReport")
     @Test
     void testGetDailyReport() {
-        assertEquals(dummyReport, dailyReportService.getDailyReport());
+        assertEquals(dummyReports, dailyReportService.getDailyReport());
     }
 }

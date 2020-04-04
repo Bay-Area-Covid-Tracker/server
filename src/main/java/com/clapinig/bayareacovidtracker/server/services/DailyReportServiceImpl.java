@@ -1,7 +1,7 @@
 package com.clapinig.bayareacovidtracker.server.services;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,18 +14,27 @@ public class DailyReportServiceImpl implements DailyReportService {
     @Autowired
     DailyReportRepository dailyReportRepository;
 
-    public HashMap<String, County> getDailyReport() {
+    public List<Report> getDailyReport() {
         List<DailyReport> dailyReportList = dailyReportRepository.getDailyReport();
-        HashMap<String, County> dailyReports = new HashMap<>();
+        List<Report> reports = new ArrayList<>();
 
-        for (DailyReport report : dailyReportList) {
-            County county = new County(report.getFIPS(), report.getAdmin2(), report.getProvince_State(),
-                    report.getCountry_Region(), report.getLast_Update(), report.getLat(), report.getLong_(),
-                    report.getConfirmed(), report.getDeaths());
+        for (DailyReport dr : dailyReportList) {
+            // county represents the properties instance variable of Report model
+            County county = new County(dr.getFIPS(), dr.getAdmin2(), dr.getProvince_State(),
+                    dr.getCountry_Region(), dr.getLast_Update(), dr.getConfirmed(), dr.getDeaths());
 
-            dailyReports.put(county.getCounty(), county);
+            // point represents the geometry instance variable of Report model
+            Point point = new Point(new ArrayList<Double>() {
+                {
+                    add(dr.getLong_());
+                    add(dr.getLat());
+                }
+            });
+            Report report = new Report(county, point);
+
+            reports.add(report);
         }
 
-        return dailyReports;
+        return reports;
     }
 }
