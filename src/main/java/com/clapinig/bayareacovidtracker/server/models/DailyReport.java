@@ -3,6 +3,7 @@ package com.clapinig.bayareacovidtracker.server.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+// Strucutre the data returned by the MySQL query
 @Entity
 public class DailyReport {
     @Id
