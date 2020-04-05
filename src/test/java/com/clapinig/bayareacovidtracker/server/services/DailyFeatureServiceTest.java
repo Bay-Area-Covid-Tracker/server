@@ -2,7 +2,6 @@ package com.clapinig.bayareacovidtracker.server.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,12 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class DailyReportServiceTest {
+public class DailyFeatureServiceTest {
     @Mock
     private DailyReportService dailyReportService = new DailyReportServiceImpl();
 
     // Initialize dummy report
-    List<Report> dummyReports = new ArrayList<>();
+    List<Feature> dummyFeatures = new ArrayList<>();
 
     @BeforeEach
     void setMockOutput() {
@@ -33,15 +32,15 @@ public class DailyReportServiceTest {
                 add(37.231);
             }
         });
-        Report dummyReport = new Report(dummyCounty, dummyPoint);
-        dummyReports.add(dummyReport);
+        Feature dummyFeature = new Feature(dummyCounty, dummyPoint);
+        dummyFeatures.add(dummyFeature);
 
-        when(dailyReportService.getDailyReport()).thenReturn(dummyReports);
+        when(dailyReportService.getFeatures()).thenReturn(dummyFeatures);
     }
 
     @DisplayName("fetch daily reports with getDailyReport")
     @Test
     void testGetDailyReport() {
-        assertEquals(dummyReports, dailyReportService.getDailyReport());
+        assertEquals(dummyFeatures, dailyReportService.getFeatures());
     }
 }

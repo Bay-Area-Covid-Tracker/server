@@ -22,14 +22,14 @@ Example JSON repsonse made from this model:
     }
 }
  */
-public class Report {
+public class Feature {
     private String type;
     private County properties;
     private Point geometry;
 
-    public Report() {}
+    public Feature() {}
 
-    public Report(County properties, Point geometry) {
+    public Feature(County properties, Point geometry) {
         this.type = "Feature";
         this.properties = properties;
         this.geometry = geometry;

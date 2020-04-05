@@ -14,9 +14,10 @@ public class DailyReportServiceImpl implements DailyReportService {
     @Autowired
     DailyReportRepository dailyReportRepository;
 
-    public List<Report> getDailyReport() {
+    // Return features required for Mapbox map
+    public List<Feature> getFeatures() {
         List<DailyReport> dailyReportList = dailyReportRepository.getDailyReport();
-        List<Report> reports = new ArrayList<>();
+        List<Feature> features = new ArrayList<>();
 
         for (DailyReport dr : dailyReportList) {
             // county represents the properties instance variable of Report model
@@ -30,11 +31,11 @@ public class DailyReportServiceImpl implements DailyReportService {
                     add(dr.getLat());
                 }
             });
-            Report report = new Report(county, point);
+            Feature feature = new Feature(county, point);
 
-            reports.add(report);
+            features.add(feature);
         }
 
-        return reports;
+        return features;
     }
 }

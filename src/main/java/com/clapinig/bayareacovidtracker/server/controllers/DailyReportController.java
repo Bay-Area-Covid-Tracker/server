@@ -21,8 +21,15 @@ public class DailyReportController {
         HashMap<String, Object> res = new HashMap<>();
 
         try {
+            HashMap<String, Object> dailyReport = new HashMap<String, Object>() {
+                {
+                    put("type", "FeatureCollection");
+                    put("features", dailyReportService.getFeatures());
+                }
+            };
+
             res.put("success", true);
-            res.put("reports", dailyReportService.getDailyReport());
+            res.put("dailyReport", dailyReport);
         } catch (Exception e) {
             res.put("success", false);
             res.put("err", e.getMessage());
