@@ -5,13 +5,18 @@ Report class is meant to reflect the data structure needed to display data on Re
 Example JSON repsonse made from this model:
 {
     "type": "Feature",
+    "county": {
+      id: 0,
+      county: ...,
+      state: ...,
+      country: ...
+      lastUpdate: ...
+      confirmed: ...
+      deaths: ...
+    }
     "properties": {
         "id": 0,
-        "county": "Example County",
-        "state": "California",
-        "country": "US",
-        "confirmed": 50,
-        "deaths": 0
+        "point_count": 50, // represents
     },
     "geometry": {
         "type": "Point",
@@ -23,39 +28,49 @@ Example JSON repsonse made from this model:
 }
  */
 public class Feature {
-    private String type;
-    private County properties;
-    private Point geometry;
+  private String type;
+  private County county;
+  private Properties properties;
+  private Point geometry;
 
-    public Feature() {}
+  public Feature() {}
 
-    public Feature(County properties, Point geometry) {
-        this.type = "Feature";
-        this.properties = properties;
-        this.geometry = geometry;
-    }
+  public Feature(County county, Properties properties, Point geometry) {
+    this.type = "Feature";
+    this.county = county;
+    this.properties = properties;
+    this.geometry = geometry;
+  }
 
-    public String getType() {
-        return type;
-    }
+  public String getType() {
+    return type;
+  }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+  public void setType(String type) {
+    this.type = type;
+  }
 
-    public County getProperties() {
-        return properties;
-    }
+  public County getCounty() {
+    return county;
+  }
 
-    public void setProperties(County properties) {
-        this.properties = properties;
-    }
+  public void setCounty(County county) {
+    this.county = county;
+  }
 
-    public Point getGeometry() {
-        return geometry;
-    }
+  public Properties getProperties() {
+    return properties;
+  }
 
-    public void setGeometry(Point geometry) {
-        this.geometry = geometry;
-    }
+  public void setProperties(Properties properties) {
+    this.properties = properties;
+  }
+
+  public Point getGeometry() {
+    return geometry;
+  }
+
+  public void setGeometry(Point geometry) {
+    this.geometry = geometry;
+  }
 }

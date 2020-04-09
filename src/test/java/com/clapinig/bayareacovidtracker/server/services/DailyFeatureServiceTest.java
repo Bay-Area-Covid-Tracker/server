@@ -16,31 +16,33 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class DailyFeatureServiceTest {
-    @Mock
-    private DailyReportService dailyReportService = new DailyReportServiceImpl();
+  @Mock
+  private DailyReportService dailyReportService = new DailyReportServiceImpl();
 
-    // Initialize dummy report
-    List<Feature> dummyFeatures = new ArrayList<>();
+  // Initialize dummy report
+  List<Feature> dummyFeatures = new ArrayList<>();
 
-    @BeforeEach
-    void setMockOutput() {
-        // Setup dummy data for test
-        County dummyCounty = new County(5555, "Alameda", "California", "US", "2020-03-28 23:05:37", 200, 4);
-        Point dummyPoint = new Point(new ArrayList<Double>() {
-            {
-                add(-121.697);
-                add(37.231);
-            }
-        });
-        Feature dummyFeature = new Feature(dummyCounty, dummyPoint);
-        dummyFeatures.add(dummyFeature);
+  @BeforeEach
+  void setMockOutput() {
+    // Setup dummy data for test
+    County dummyCounty = new County(5555, "Alameda", "California", "US", "2020-03-28 23:05:37", 200, 4);
+    /*Point dummyPoint = new Point(new ArrayList<Double>() {
+        {
+            add(-121.697);
+            add(37.231);
+        }
+    });*/
+    Properties dummyProperties = new Properties(dummyCounty.getId(), dummyCounty.getConfirmed());
+    Point dummyPoint = new Point(-121.697, 37.231);
+    Feature dummyFeature = new Feature(dummyCounty, dummyProperties, dummyPoint);
+    dummyFeatures.add(dummyFeature);
 
-        when(dailyReportService.getFeatures()).thenReturn(dummyFeatures);
-    }
+    when(dailyReportService.getFeatures()).thenReturn(dummyFeatures);
+  }
 
-    @DisplayName("fetch daily reports with getDailyReport")
-    @Test
-    void testGetDailyReport() {
-        assertEquals(dummyFeatures, dailyReportService.getFeatures());
-    }
+  @DisplayName("fetch daily reports with getDailyReport")
+  @Test
+  void testGetDailyReport() {
+    assertEquals(dummyFeatures, dailyReportService.getFeatures());
+  }
 }
