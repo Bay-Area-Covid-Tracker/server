@@ -11,31 +11,26 @@ import com.clapinig.bayareacovidtracker.server.models.*;
 
 @Service
 public class DailyReportServiceImpl implements DailyReportService {
-    @Autowired
-    DailyReportRepository dailyReportRepository;
+  @Autowired
+  DailyReportRepository dailyReportRepository;
 
-    // Return features required for Mapbox map
-    public List<Feature> getFeatures() {
-        List<DailyReport> dailyReportList = dailyReportRepository.getDailyReport();
-        List<Feature> features = new ArrayList<>();
+  // Return features required for Mapbox map
+  public List<Feature> getFeatures() {
+    List<DailyReport> dailyReportList = dailyReportRepository.getDailyReport();
+    List<Feature> features = new ArrayList<>();
 
-        for (DailyReport dr : dailyReportList) {
-            // county represents the properties instance variable of Report model
-            County county = new County(dr.getFIPS(), dr.getAdmin2(), dr.getProvince_State(),
-                    dr.getCountry_Region(), dr.getLast_Update(), dr.getConfirmed(), dr.getDeaths());
+    for (DailyReport dr : dailyReportList) {
+      County county = new County(dr.getFIPS(), dr.getAdmin2(), dr.getProvince_State(),
+              dr.getCountry_Region(), dr.getLast_Update(), dr.getConfirmed(), dr.getDeaths());
 
-            // point represents the geometry instance variable of Report model
-            Point point = new Point(new ArrayList<Double>() {
-                {
-                    add(dr.getLong_());
-                    add(dr.getLat());
-                }
-            });
-            Feature feature = new Feature(county, point);
+      // properties and point represent the data needed to render clusters in Mapbox on client
+      Properties properties = new Properties(county.getId(), county.getConfirmed());
+      Point point = new Point(dr.getLong_(), dr.getLat());
+      Feature feature = new Feature(county, properties, point);
 
-            features.add(feature);
-        }
-
-        return features;
+      features.add(feature);
     }
+
+    return features;
+  }
 }
