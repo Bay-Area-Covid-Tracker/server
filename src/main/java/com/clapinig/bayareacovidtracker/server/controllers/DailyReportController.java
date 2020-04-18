@@ -13,28 +13,28 @@ import com.clapinig.bayareacovidtracker.server.services.DailyReportService;
 @RestController
 @RequestMapping(path="/api")
 public class DailyReportController {
-    @Autowired
-    private DailyReportService dailyReportService;
+  @Autowired
+  private DailyReportService dailyReportService;
 
-    @GetMapping(path="/daily-reports")
-    public @ResponseBody HashMap<String, Object> getAll() {
-        HashMap<String, Object> res = new HashMap<>();
+  @GetMapping(path="/daily-reports")
+  public @ResponseBody HashMap<String, Object> getAll() {
+    HashMap<String, Object> res = new HashMap<>();
 
-        try {
-            HashMap<String, Object> dailyReport = new HashMap<String, Object>() {
-                {
-                    put("type", "FeatureCollection");
-                    put("features", dailyReportService.getFeatures());
-                }
-            };
-
-            res.put("success", true);
-            res.put("dailyReport", dailyReport);
-        } catch (Exception e) {
-            res.put("success", false);
-            res.put("err", e.getMessage());
+    try {
+      HashMap<String, Object> dailyReport = new HashMap<String, Object>() {
+        {
+          put("type", "FeatureCollection");
+          put("features", dailyReportService.getFeatures());
         }
+      };
 
-        return res;
+      res.put("success", true);
+      res.put("dailyReport", dailyReport);
+    } catch (Exception e) {
+      res.put("success", false);
+      res.put("err", e.getMessage());
     }
+
+    return res;
+  }
 }
